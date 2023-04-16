@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    name: mysql-pod
+    app: bookstore-api-app
+spec:
+  containers:
+  - name: database
+    image: mysql:5.7
+    ports:
+     - containerPort: 3306
+    envFrom:
+      - secretRef:
+          name: mysecret

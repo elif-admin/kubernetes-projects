@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kittens-carousel-pod-deploy
+  labels:
+    name: kittens-carousel-pod-deploy
+    app: kittens-carousel-app
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      name: kittens-carousel-pod
+      app: kittens-carousel-app
+  template:
+    metadata:
+      name: kittens-carousel-pod
+      labels:
+        name: kittens-carousel-pod
+        app: kittens-carousel-app
+    spec:
+      containers:
+      - name: kittens-carousel
+        image: aydintokuslu/kittens_carousel:2.0
+        ports:
+            - containerPort: 80

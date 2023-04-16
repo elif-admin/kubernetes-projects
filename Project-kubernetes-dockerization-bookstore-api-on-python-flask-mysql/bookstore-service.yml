@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookstore-api-server
+  labels:
+    name: bookstore-api-service
+    app: bookstore-api-app
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
+  type: NodePort
+  selector:
+     name: bookstore-api-pod
+     app: bookstore-api-app

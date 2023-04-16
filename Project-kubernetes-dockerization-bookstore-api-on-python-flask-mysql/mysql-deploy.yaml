@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #name: mysql-server-pod-deploy
+  name: database
+  labels:
+    name: mysql-deploy
+    app: bookstore-api-app
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      name: mysql-pod
+      app: bookstore-api-app
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        name: mysql-pod
+        app: bookstore-api-app
+    spec:
+      containers:
+      - name: database
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        envFrom:
+          - secretRef:
+              name: mysecret

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-api-deploy
+  labels:
+    name: bookstore-api-deploy
+    app: bookstore-api-app
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      name: bookstore-api-pod
+      app: bookstore-api-app
+  template:
+    metadata:
+      name: database
+      labels:
+        name: bookstore-api-pod
+        app: bookstore-api-app
+    spec:
+      volumes:
+        - name: bookstore-api-pv-storage
+          persistentVolumeClaim:
+            claimName: bookstore-api-pv-claim
+      containers:
+        - name: database
+          image: aydintokuslu/bookstore-api:4.0
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/database"
+              name: bookstore-api-pv-storage

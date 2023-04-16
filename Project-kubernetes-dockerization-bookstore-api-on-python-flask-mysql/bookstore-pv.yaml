@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bookstore-api-pv-vol
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/c/Users/hakan/Desktop/elif-github-project/Kubernetes/Project-kubernetes-dockerization-bookstore-api-on-python-flask-mysql"

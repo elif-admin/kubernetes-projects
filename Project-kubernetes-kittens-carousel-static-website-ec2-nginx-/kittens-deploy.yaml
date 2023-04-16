@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kittens-pod-deploy
+  labels:
+    name: kittens-pod-deploy
+    app: kittens-website-app
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      name: kittens-pod
+      app: kittens-website-app
+  template:
+    metadata:
+      name: kittens-pod
+      labels:
+        name: kittens-pod
+        app: kittens-website-app
+    spec:
+      containers:
+      - name: kittens
+        image: aydintokuslu/kittens_website:1.0
+        ports:
+            - containerPort: 80

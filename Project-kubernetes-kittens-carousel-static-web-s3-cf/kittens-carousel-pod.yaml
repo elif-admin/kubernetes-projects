@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kittens-carousel-pod
+  labels:
+    name: kittens-carousel-pod
+    app: kittens-carousel-app
+
+spec:
+  volumes:
+    - name: kittens-carousel-pv-storage
+      persistentVolumeClaim:
+        claimName: kittens-carousel-pv-vol
+  containers:
+    - name: kittens-carousel-pod
+      image: aydintokuslu/kittens_carousel:2.0
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - mountPath: "/var/www/html/"
+          name: kittens-carousel-pv-storage
